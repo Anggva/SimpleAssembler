@@ -1,0 +1,20 @@
+. TESTS PC FORWARD ADDRESSING
+. TESTS BASE ADDRESSING
+. TESTS PC BACKWARD ADDRESSING
+EXAMPLE   START    100
+EXA       LDT      #4  
+EXA       LDT      #3          
+          LDA      #0         
+          ADDR     T,A       
+          ADD      SEC      
+         +STA      ANS     
+          LDX      ONE    
+          STA      ANS,X 
+          RSUB         
+SEC       WORD     -30
+NUM       RESW     1
+ANS       RESW     2   
+ONE       WORD     3
+BIG       RESW     1000   
+B         RESW     1
+          END      EXA

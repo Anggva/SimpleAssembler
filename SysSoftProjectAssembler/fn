@@ -1,0 +1,1052 @@
+#!/bin/sh
+# This is a shell archive (produced by GNU sharutils 4.11).
+# To extract the files from this archive, save it to some FILE, remove
+# everything before the `#!/bin/sh' line above, then type `sh FILE'.
+#
+lock_dir=_sh14383
+# Made on 2014-03-28 00:00 EDT by <vasilina@vasilina-Satellite-T235D>.
+# Source directory was `/home/vasilina/Prg/workspace/SysSoftProjectAssembler'.
+#
+# Existing files will *not* be overwritten, unless `-c' is specified.
+#
+# This shar contains:
+# length mode       name
+# ------ ---------- ------------------------------------------
+#   2607 -rw-rw-r-- AssemblerLine.java
+#   3060 -rw-rw-r-- HashTable.java
+#    526 -rw-rw-r-- LiteralPool.java
+#   6132 -rw-rw-r-- Pr3.java
+#   1305 -rw-rw-r-- dic
+#    216 -rw-rw-r-- makefile
+#     24 -rwxrwxr-x p3
+#   1796 -rw-rw-r-- text
+#
+MD5SUM=${MD5SUM-md5sum}
+f=`${MD5SUM} --version | egrep '^md5sum .*(core|text)utils'`
+test -n "${f}" && md5check=true || md5check=false
+${md5check} || \
+  echo 'Note: not verifying md5sums.  Consider installing GNU coreutils.'
+if test "X$1" = "X-c"
+then keep_file=''
+else keep_file=true
+fi
+echo=echo
+save_IFS="${IFS}"
+IFS="${IFS}:"
+gettext_dir=
+locale_dir=
+set_echo=false
+
+for dir in $PATH
+do
+  if test -f $dir/gettext \
+     && ($dir/gettext --version >/dev/null 2>&1)
+  then
+    case `$dir/gettext --version 2>&1 | sed 1q` in
+      *GNU*) gettext_dir=$dir
+      set_echo=true
+      break ;;
+    esac
+  fi
+done
+
+if ${set_echo}
+then
+  set_echo=false
+  for dir in $PATH
+  do
+    if test -f $dir/shar \
+       && ($dir/shar --print-text-domain-dir >/dev/null 2>&1)
+    then
+      locale_dir=`$dir/shar --print-text-domain-dir`
+      set_echo=true
+      break
+    fi
+  done
+
+  if ${set_echo}
+  then
+    TEXTDOMAINDIR=$locale_dir
+    export TEXTDOMAINDIR
+    TEXTDOMAIN=sharutils
+    export TEXTDOMAIN
+    echo="$gettext_dir/gettext -s"
+  fi
+fi
+IFS="$save_IFS"
+if (echo "testing\c"; echo 1,2,3) | grep c >/dev/null
+then if (echo -n test; echo 1,2,3) | grep n >/dev/null
+     then shar_n= shar_c='
+'
+     else shar_n=-n shar_c= ; fi
+else shar_n= shar_c='\c' ; fi
+f=shar-touch.$$
+st1=200112312359.59
+st2=123123592001.59
+st2tr=123123592001.5 # old SysV 14-char limit
+st3=1231235901
+
+if touch -am -t ${st1} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st1} && test -f ${f}; then
+  shar_touch='touch -am -t $1$2$3$4$5$6.$7 "$8"'
+
+elif touch -am ${st2} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st2} && test ! -f ${st2tr} && test -f ${f}; then
+  shar_touch='touch -am $3$4$5$6$1$2.$7 "$8"'
+
+elif touch -am ${st3} ${f} >/dev/null 2>&1 && \
+   test ! -f ${st3} && test -f ${f}; then
+  shar_touch='touch -am $3$4$5$6$2 "$8"'
+
+else
+  shar_touch=:
+  echo
+  ${echo} 'WARNING: not restoring timestamps.  Consider getting and
+installing GNU `touch'\'', distributed in GNU coreutils...'
+  echo
+fi
+rm -f ${st1} ${st2} ${st2tr} ${st3} ${f}
+#
+if test ! -d ${lock_dir} ; then :
+else ${echo} "lock directory ${lock_dir} exists"
+     exit 1
+fi
+if mkdir ${lock_dir}
+then ${echo} "x - created lock directory ${lock_dir}."
+else ${echo} "x - failed to create lock directory ${lock_dir}."
+     exit 1
+fi
+# ============= AssemblerLine.java ==============
+if test -n "${keep_file}" && test -f 'AssemblerLine.java'
+then
+${echo} "x - SKIPPING AssemblerLine.java (file already exists)"
+else
+${echo} "x - extracting AssemblerLine.java (text)"
+  sed 's/^X//' << 'SHAR_EOF' > 'AssemblerLine.java' &&
+X
+public class AssemblerLine {
+X	private String label;
+X	private String mneumonic;
+X	private String type;
+X	private String operand;
+X	private String comment;	
+X	private int address;
+X	private int size;
+X	AssemblerLine(){
+X		label = new String();
+X		mneumonic = new String();
+X		type = new String();
+X		operand = new String();
+X		comment = new String();
+X		address = 0;
+X		size = 0;
+X	}
+X	AssemblerLine(String[] args){
+X		label = args[0];
+X		mneumonic = args[1];
+X		type = args[2];
+X		operand = args[3];
+X		comment = args[4];
+X		size = 0;
+X	}
+X	AssemblerLine(String comment){
+X		label = new String();
+X		mneumonic = new String();
+X		type = new String();
+X		operand = new String();
+X		this.comment = comment;
+X		address = 0;
+X		size = 0;
+X	}
+X	
+X	AssemblerLine(AssemblerLine t){
+X		label = t.label;
+X		mneumonic = t.mneumonic;
+X		type = t.type;
+X		operand = t.operand;
+X		comment = t.comment;
+X		address = t.address;
+X		size = t.size;
+X	}
+X	
+X	public void setValues(String[] args){
+X		label = args[0];
+X		mneumonic = args[1];
+X		type = args[2];
+X		operand = args[3];
+X		comment = args[4];
+X	}
+X
+X	public int setAddr(int prevAddr, HashTable table){
+X		if (mneumonic.equals(""))
+X			size = 0;
+X		else if (mneumonic.equals("RESW"))
+X			size = 3*Integer.valueOf(operand);
+X		else
+X			size = table.retrieveSize(mneumonic);
+X		if (size == 99999){
+X			System.out.println("Error! Unknown assembler command!");
+X			address = prevAddr;
+X			return address;
+X		}
+X		address = prevAddr;
+X		int nextAddress = address+size;
+X		return nextAddress;
+X	}
+X	public String toString(){
+X		String result = "";
+X		if ((size == 0)&&(mneumonic.length() == 0)){
+X			result = "    " + label + " " 
+X					+ mneumonic + " " + type + operand + " " + comment;
+X		}
+X		else if (mneumonic.length() > 0){
+X			result = Integer.toHexString(address) + " " + label + " " 
+X					+ mneumonic + " " + type + operand + " " + comment;
+X		}
+X		return result;
+X		
+X	}
+X	
+X	public void addComment(String S){
+X		this.comment = S;
+X	}
+X	
+X	public boolean detectLiteral(){
+X		if ((!operand.equals(""))&&(operand.charAt(0) == '='))
+X			return true;
+X		else return false;
+X	}
+X	
+X	public LiteralPool createLiteral(){
+X		LiteralPool l = new LiteralPool(operand);
+X		return l;
+X	}
+X	
+X	public boolean detectLtorg(){
+X		if ((!mneumonic.equals(""))&&(mneumonic.equals("LTORG")))
+X			return true;
+X		else return false;
+X	}
+X	
+X	public int pushLiteral(LiteralPool lit, int prevAddress){
+X		label = lit.getLit();
+X		if (label.length() > 8)
+X			label = label.substring(0, 6) + "0";
+X		size = lit.getSize();
+X		mneumonic = "BYTE";
+X		operand = lit.getLit();
+X		comment = "";
+X		type = "";
+X		address = prevAddress;
+X		int nextAddress = address + size;
+X		return nextAddress;
+X		
+X	}
+X	
+X
+}
+SHAR_EOF
+  (set 20 14 03 27 22 21 06 'AssemblerLine.java'
+   eval "${shar_touch}") && \
+  chmod 0664 'AssemblerLine.java'
+if test $? -ne 0
+then ${echo} "restore of AssemblerLine.java failed"
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'AssemblerLine.java': 'MD5 check failed'
+       ) << \SHAR_EOF
+8214efdf5378c41f565c2f674138b772  AssemblerLine.java
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'AssemblerLine.java'` -ne 2607 && \
+  ${echo} "restoration warning:  size of 'AssemblerLine.java' is not 2607"
+  fi
+fi
+# ============= HashTable.java ==============
+if test -n "${keep_file}" && test -f 'HashTable.java'
+then
+${echo} "x - SKIPPING HashTable.java (file already exists)"
+else
+${echo} "x - extracting HashTable.java (text)"
+  sed 's/^X//' << 'SHAR_EOF' > 'HashTable.java' &&
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+public class HashTable {
+X	private int size;
+X	private String[][] table;
+X	HashTable(){
+X		size = 0;
+X		table = null;
+X	}
+X	
+X	public boolean isNumber(String s){
+X		boolean c = true;
+X		try{
+X			Integer.parseInt(s);
+X		}catch(NumberFormatException exc){
+X			c = false;
+X		}
+X		return c;
+X	}
+X	public int nextPrime (int n)
+X	{
+X		if (n%2==0) n+=1;
+X		boolean check = false;
+X		while (!check) {
+X			int stop = (int)Math.sqrt(n);
+X			if (stop < 3){
+X				check = true;
+X				break;
+X			}
+X			else for (int i = 2; i < stop; i+=2) {
+X				if (n%i==0) {
+X					check=false; 
+X					break;
+X				} 
+X				
+X				check = true;
+X			}
+X			if (!check) {
+X				n+=2;
+X			}
+X		}
+X		return n;
+X	}
+X	public int hash(String s, int size)
+X	{
+X		int h = 0;
+X		for (int i = 0; i < s.length(); i++)
+X		{
+X			h = (h * 10 + s.charAt(i)) % size;
+X		}
+X		return h;
+X	}
+X	public int hash(int item, int size)
+X	{
+X		String s = String.valueOf(item);
+X		int h = 0;
+X		for (int i = 0; i < s.length(); i++)
+X		{
+X			h = (h * 10 + Integer.parseInt(String.valueOf(s.charAt(i)))) % size;
+X		}
+X		return h;
+X	}
+X	
+X	public void parseDic(String fileName){
+X		try{
+X			BufferedReader reader = new BufferedReader(new FileReader(fileName));
+X			while (reader.readLine() != null){
+X				size++;
+X			}
+X			size = nextPrime(size);
+X			table = new String[4][size];
+X			String line = new String();
+X			reader.close();
+X			reader = new BufferedReader(new FileReader(fileName));
+X			while ((line = reader.readLine()) != null){
+X				String [] brk = line.split(" ");
+X				int hvalue = hash(brk[0], size);
+X				while(table[3][hvalue] != null){
+X					hvalue++;
+X					hvalue=hash(hvalue,size);
+X				}
+X				table[0][hvalue] = brk[0];
+X				table[1][hvalue] = brk[1];
+X				table[2][hvalue] = brk[2];
+X				table[3][hvalue] = String.valueOf(hvalue);
+X			}			
+X		}
+X		catch (IOException E){
+X			System.out.println("File not found");
+X		}
+X		catch (ArrayIndexOutOfBoundsException E){
+X			System.out.println("File not found");
+X		}
+X	}
+X	public int retrieveSize(String mneumonic){
+X		int s = 0;
+X		boolean c = false;
+X		int hvalue = hash(mneumonic, size);
+X		int count = 0;
+X		while (table[3][hvalue] != null)
+X		{
+X			if (table[0][hvalue].equals(mneumonic)){
+X				s = Integer.valueOf(table[2][hvalue]);
+X				c = true;
+X				break;
+X			}
+X			++count;
+X			if (count > size)
+X				break;
+X			++hvalue;
+X			hvalue=hash(hvalue,size);
+X		}
+X		if ((!c)||(count > size)){
+X			System.out.println("Error, " + mneumonic + " wasn't found!"+"\n");
+X			return 99999;
+X		}
+X		return s;
+X	}
+X	public void createSimpleTable(int size){
+X		this.size = nextPrime(size);
+X		table = new String [2][this.size];
+X
+X	}
+X	public int useSimpleTable (String s){
+X		if (s.equals(""))
+X			return 1;
+X		int hvalue = hash(s, size);
+X		boolean c = true;
+X		while(table[0][hvalue] != null){
+X			if (table[0][hvalue].equals(s)){
+X				System.out.println("Error! Label " + s + " already exists in the file");
+X				c = false;
+X				break;
+X			}
+X			else {
+X				hvalue++;
+X				hvalue=hash(hvalue,size);
+X			}	
+X		}
+X		if (c){
+X			table[0][hvalue] = s;
+X			table[1][hvalue] = String.valueOf(hvalue);
+X		}
+X		return 0;
+X	
+X	}
+}
+SHAR_EOF
+  (set 20 14 03 27 23 49 37 'HashTable.java'
+   eval "${shar_touch}") && \
+  chmod 0664 'HashTable.java'
+if test $? -ne 0
+then ${echo} "restore of HashTable.java failed"
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'HashTable.java': 'MD5 check failed'
+       ) << \SHAR_EOF
+b4a5e339e45a7c2a7f2d4473a8a2b4bb  HashTable.java
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'HashTable.java'` -ne 3060 && \
+  ${echo} "restoration warning:  size of 'HashTable.java' is not 3060"
+  fi
+fi
+# ============= LiteralPool.java ==============
+if test -n "${keep_file}" && test -f 'LiteralPool.java'
+then
+${echo} "x - SKIPPING LiteralPool.java (file already exists)"
+else
+${echo} "x - extracting LiteralPool.java (text)"
+  sed 's/^X//' << 'SHAR_EOF' > 'LiteralPool.java' &&
+X
+public class LiteralPool {
+X	private int size;
+X	private String literal;
+X	
+X	LiteralPool(){
+X		size = 0;
+X		literal = new String();
+X	}
+X	
+X	LiteralPool(String lit){
+X		literal = lit;
+X		size = 0;
+X		if (literal.charAt(1)=='x')
+X			if (literal.length()%2 == 1)
+X				System.out.println("Odd number of characters in the literal");
+X			else
+X				size = (literal.length() - 2) / 2 - 1;
+X		if (literal.charAt(1)=='c')
+X			size = literal.length() - 4;
+X	}
+X	
+X	public int getSize(){
+X		return size;
+X	}
+X	
+X	public String getLit(){
+X		return literal;
+X	}
+}
+SHAR_EOF
+  (set 20 14 03 27 20 41 09 'LiteralPool.java'
+   eval "${shar_touch}") && \
+  chmod 0664 'LiteralPool.java'
+if test $? -ne 0
+then ${echo} "restore of LiteralPool.java failed"
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'LiteralPool.java': 'MD5 check failed'
+       ) << \SHAR_EOF
+30775224507ce010d9c618dbe070ef47  LiteralPool.java
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'LiteralPool.java'` -ne 526 && \
+  ${echo} "restoration warning:  size of 'LiteralPool.java' is not 526"
+  fi
+fi
+# ============= Pr3.java ==============
+if test -n "${keep_file}" && test -f 'Pr3.java'
+then
+${echo} "x - SKIPPING Pr3.java (file already exists)"
+else
+${echo} "x - extracting Pr3.java (text)"
+  sed 's/^X//' << 'SHAR_EOF' > 'Pr3.java' &&
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+public class Pr3 {
+X	public static AssemblerLine [] deleteEmpty(AssemblerLine [] table){
+X		int newSize = table.length;
+X		for (int i = table.length - 1; i>=0; i--)
+X			if (table[i]==null){
+X				newSize--;
+X			}
+X		AssemblerLine [] newTable = new AssemblerLine [newSize];
+X		for (int i = 0; i < newSize; i++)
+X			newTable[i] = new AssemblerLine(table[i]);
+X		return newTable;
+X				
+X	}
+X	
+X	public static AssemblerLine [] shiftAndAdd (AssemblerLine [] table, int n, int start){
+X		int newSize = table.length + n;
+X		AssemblerLine [] newTable = new AssemblerLine [newSize];
+X		for (int i = 0; i < start; i++){
+X			newTable[i] = new AssemblerLine(table[i]);
+X		}
+X		for (int i = newSize - 1; i >= start + n; i--){
+X			newTable[i] = new AssemblerLine(table[i - n]);
+X		}
+X		for (int i = start; i < start + n; i++)
+X			newTable[i] = new AssemblerLine();
+X		return newTable;
+X	}
+X	
+X	public static AssemblerLine [] add (AssemblerLine [] table, int n){
+X		int newSize = table.length + n;
+X		AssemblerLine [] newTable = new AssemblerLine [newSize];
+X		for (int i = 0; i < table.length; i++){
+X			newTable[i] = new AssemblerLine(table[i]);
+X		}
+X		for (int i = table.length; i < newSize; i++){
+X			newTable[i] = new AssemblerLine();
+X		}
+X		return newTable;
+X	}
+X	
+X	public static String trimTrail (String S){
+X		if (S.length()>0){
+X			int l = S.length()-1;
+X			while (S.charAt(l) == ' ')
+X				l--;
+X			S = S.substring(0, l+1);
+X		}
+X		return S;
+X	}
+X	
+X	
+X	public static boolean isInteger(String s) {
+X	    try { 
+X	        Integer.parseInt(s); 
+X	    } catch(NumberFormatException e) { 
+X	        return false; 
+X	    }
+X	    return true;
+X	}
+X	
+X	public static int setStart(boolean check, String word, int addr){
+X		if (word.equals("START"))
+X			if (check)
+X				return addr;
+X			else
+X				System.out.println("More than one START instruction in the file");
+X		return 0;
+X			
+X	}
+X	
+X	public static String parseString (String line, int start, int end){
+X		StringBuilder newString = new StringBuilder ("");
+X		for (int i = start; i < end; i++){
+X			if ((line.charAt(i) == ' ')&&(start < 31)){
+X				break;
+X			}
+X			else 
+X				newString.append(line.charAt(i));
+X		}
+X		String result = newString.toString();
+X		return result;
+X	}
+X	
+X	public static int fileSize (String fileName){
+X		int size = 0;
+X		try{
+X			BufferedReader reader = new BufferedReader(new FileReader(fileName));
+X			while (reader.readLine() != null){
+X				size++;
+X			}
+X			reader.close();
+X		}
+X		catch (IOException E){
+X			System.out.println("File not found");
+X		}
+X		return size;
+X	}
+X	
+X	public static void parse (String fileName){
+X		int size = fileSize(fileName);
+X		AssemblerLine[] table = new AssemblerLine[size];
+X		int startAddr = 0;
+X		int startLine = 0;
+X		boolean check = true;
+X		try{
+X			String line = new String();
+X			BufferedReader reader = new BufferedReader(new FileReader(fileName));
+X			int k = 0;
+X			int e = 0;
+X			HashTable labels = new HashTable();
+X			labels.createSimpleTable(size);
+X			while ((line = reader.readLine()) != null){
+X				String[] split = new String[5];
+X				line = trimTrail(line);
+X				if (line.equals("")){
+X					size--;
+X					continue;
+X				}
+X				if (line.length() > 80){
+X					table[k] = new AssemblerLine("Error, input line is too long");
+X					k++;
+X					continue;
+X				}	
+X				if (line.charAt(0)=='.')
+X				{
+X					table[k] = new AssemblerLine(line);
+X					k++;
+X					continue;
+X				}
+X				if (line.length()<4){
+X					k++;
+X					continue;
+X				}
+X				split[0] = parseString(line, 0, 7);
+X				labels.useSimpleTable(split[0]);
+X				if ((line.length()>7)&&(line.charAt(9)=='+'))
+X					e = 1;
+X				if (line.length()<16)
+X					split[1] = parseString(line, 10, line.length());
+X				else
+X					split[1] = parseString(line, 10, 16);
+X				
+X				if ((line.length()<18)||(line.charAt(18) == ' '))
+X					split [2] = "";
+X				else 
+X					split [2] = String.valueOf(line.charAt(18));
+X				if (line.length()<28)
+X					split[3] = parseString(line, 19, line.length());
+X				else
+X					split[3] = parseString(line, 19, 28);
+X				boolean m = isInteger(split[3]);
+X				if (m){
+X					int c = setStart(check, split[1], Integer.parseInt(split[3], 16));
+X					if (c != 0){
+X						check = false;
+X						startAddr = c;
+X						startLine = k;
+X					}
+X				}
+X				if (line.length()<31)
+X					split [4] = "";
+X				else
+X					split[4] = parseString(line, 31, line.length());
+X				if (e == 1)
+X					split[1] = "+" + split[1];
+X				e = 0;
+X				table[k] = new AssemblerLine(split);
+X				k++;
+X				}
+X			if (size<table.length)
+X				table = deleteEmpty(table);
+X			HashTable dic = new HashTable();
+X			dic.parseDic("dic");
+X			LiteralPool [] lits = new LiteralPool [size];
+X			int st = 1;
+X			if (check){
+X				System.out.println("No START instruction! Start at address 0");
+X				st = 0;
+X			}
+X			int nextAddr = startAddr;
+X			for (int i = 0; i < startLine; i++){
+X				int a = table[i].setAddr(nextAddr, dic);
+X				nextAddr = a;
+X			}
+X			table[startLine].setAddr(startAddr, dic);
+X			k = 0;
+X			for (int i = st; i < size; i++){
+X				int a = table[i].setAddr(nextAddr, dic);
+X				nextAddr = a;
+X				if (table[i].detectLiteral()){
+X					lits[k] = table[i].createLiteral();
+X					k++;
+X				}
+X				if (table[i].detectLtorg()){
+X					table = shiftAndAdd(table, k, i+1);
+X					int m = 0;
+X					for (int j = i+1; j < i + k+1; j++){
+X						nextAddr = table[j].pushLiteral(lits[m], nextAddr);
+X						lits[m] = new LiteralPool();
+X						m++;
+X					}
+X					i+=k;
+X					size+=k;
+X					k = 0;					
+X				}
+X			}
+X			if (k > 0){
+X				table = add(table, k);
+X				int newSize = size + k;
+X				int m = 0;
+X				for (int i = size; i < newSize; i++){
+X					nextAddr = table[i].pushLiteral(lits[m], nextAddr);
+X					m++;
+X				}
+X				size = newSize;
+X			}
+X			for (int i = 0; i < size; i++)
+X				System.out.println(table[i].toString());	
+X		}
+X		catch (IOException E){
+X			System.out.println("File not found");
+X		}
+X		catch (ArrayIndexOutOfBoundsException E){
+X			System.out.println("File not found");
+X		}
+X		catch (StringIndexOutOfBoundsException E){
+X			System.out.println("Incorrect format of the input file");
+X		}
+X		catch (NumberFormatException E){
+X			System.out.println("Incorrect format of the input file");
+X		}
+X	}
+X	
+X	public static void main (String[] args){
+X		String filename = args[0];
+X		parse(filename);
+X	}
+}
+SHAR_EOF
+  (set 20 14 03 27 23 42 25 'Pr3.java'
+   eval "${shar_touch}") && \
+  chmod 0664 'Pr3.java'
+if test $? -ne 0
+then ${echo} "restore of Pr3.java failed"
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'Pr3.java': 'MD5 check failed'
+       ) << \SHAR_EOF
+1c98630a880d2f51fe9922f907e950a7  Pr3.java
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'Pr3.java'` -ne 6132 && \
+  ${echo} "restoration warning:  size of 'Pr3.java' is not 6132"
+  fi
+fi
+# ============= dic ==============
+if test -n "${keep_file}" && test -f 'dic'
+then
+${echo} "x - SKIPPING dic (file already exists)"
+else
+${echo} "x - extracting dic (text)"
+  sed 's/^X//' << 'SHAR_EOF' > 'dic' &&
++LDB 68 4
+MULR 98 2
++SSK EC 4
+WD DC 3
+*STX 10 3
+*OR 44 3
+AND 40 3
+*LDA 00 3
++JGT 34 4
++STL 14 4
+*WD DC 3
++STI D4 4
+LPS D0 3
++LDT 74 4
+*LDCH 50 3
+*LDL 08 3
+TIXR B8 2
+SUBF 5C 3
+*JSUB 48 3
+LDX 04 3
++MULF 60 4
++J 3C 4
+SVC B0 2
+STT 84 3
++COMP 28 4
+TIX 2C 3
+FLOAT C0 1
+LDT 74 3
+STA 0C 3
+*TD E0 3
+SHIFTR A8 2
+STB 78 3
+SIO F0 1
+LDA 00 3
+HIO F4 1
++STS 7C 4
+DIVF 64 3
+*TIX 2C 3
++JSUB 48 4
+LDCH 50 3
++COMPF 88 4
+JEQ 30 3
+*DIV 24 3
++STT 84 4
++SUBF 5C 4
+*AND 40 3
++OR 44 4
+SSK EC 3
++JLT 38 4
+*RD D8 3
+LDS 6C 3
+*MUL 20 3
++LDS 6C 4
++DIV 24 4 
+J 3C 3
++MUL 20 4
+*COMP 28 3
++STX 10 4
+*J 3C 3
++LDA 00 4
++SUB 1C 4
++STB 78 4
+*JLT 38 3
+SUB 1C 3
++ADDF 58 4
+RD D8 3
+*JEQ 30 3
+LDB 68 3
+RSUB 4C 3
+MULF 60 3
+JSUB 48 3
+SUBR 94 2
+DIVR 9C 2
+LDL 08 3
++JEQ 30 4
++STCH 54 4
+*STL 14 3
++STA 0C 4
+STSW E8 3
+COMPF 88 3
++DIVF 64 4
++STF 80 4
+TIO F8 1
+*ADD 18 3
+*STSW E8 3
++STSW E8 4
++LPS D0 4
+JLT 38 3
+*JGT 34 3
+MUL 20 3
++LDL 08 4
+OR 44 3
+COMP 28 3
+TD E0 3
+STS 7C 3
+*STCH 54 3
+LDF 70 3
+ADD 18 3
+FIX C4 1
+*RSUB 4C 3
+NORM C8 1
+STF 80 3
+*LDX 04 3
+CLEAR B4 2
++RSUB 4C 4
+ADDF 58 3
++WD DC 4
++LDCH 50 4
++LDF 70 4
++LDX 04 4
+STCH 54 3
++ADD 18 4
++AND 40 4
+*SUB 1C 3
+STX 10 3
+RMO AC 2
+COMPR A0 2
+SHIFTL A4 2
+STL 14 3
++TD E0 4
+ADDR 90 2
+STI D4 3
++TIX 2C 4
+*STA 0C 3
+JGT 34 3
+DIV 24 3
++RD D8 4
+START 0 0
+END 0 0
+BASE 0 0
+EQU 0 0
+BYTE 0 1
+WORD 0 3
+LTORG 0 0
+SHAR_EOF
+  (set 20 14 03 27 16 11 50 'dic'
+   eval "${shar_touch}") && \
+  chmod 0664 'dic'
+if test $? -ne 0
+then ${echo} "restore of dic failed"
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'dic': 'MD5 check failed'
+       ) << \SHAR_EOF
+b00ba0b06683430c968cb7c161a10930  dic
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'dic'` -ne 1305 && \
+  ${echo} "restoration warning:  size of 'dic' is not 1305"
+  fi
+fi
+# ============= makefile ==============
+if test -n "${keep_file}" && test -f 'makefile'
+then
+${echo} "x - SKIPPING makefile (file already exists)"
+else
+${echo} "x - extracting makefile (text)"
+  sed 's/^X//' << 'SHAR_EOF' > 'makefile' &&
+Pr3.class: Pr3.java
+X	javac Pr3.java
+AssemblerLine.class: AssemblerLine.java
+X	javac AssemblerLine.java
+LiteralPool.class: LiteralPool.java
+X	javac LiteralPool.java
+HashTable.class: HashTable.java
+X	javac HashTable.java
+SHAR_EOF
+  (set 20 14 03 27 23 58 17 'makefile'
+   eval "${shar_touch}") && \
+  chmod 0664 'makefile'
+if test $? -ne 0
+then ${echo} "restore of makefile failed"
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'makefile': 'MD5 check failed'
+       ) << \SHAR_EOF
+f2a0733be4de72000cc6e778f393a0fe  makefile
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'makefile'` -ne 216 && \
+  ${echo} "restoration warning:  size of 'makefile' is not 216"
+  fi
+fi
+# ============= p3 ==============
+if test -n "${keep_file}" && test -f 'p3'
+then
+${echo} "x - SKIPPING p3 (file already exists)"
+else
+${echo} "x - extracting p3 (text)"
+  sed 's/^X//' << 'SHAR_EOF' > 'p3' &&
+#!/bin/bash
+java Pr3 $1
+SHAR_EOF
+  (set 20 14 03 27 23 53 20 'p3'
+   eval "${shar_touch}") && \
+  chmod 0775 'p3'
+if test $? -ne 0
+then ${echo} "restore of p3 failed"
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'p3': 'MD5 check failed'
+       ) << \SHAR_EOF
+72a5a9eb1ef48ab00142e64e6fe82834  p3
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'p3'` -ne 24 && \
+  ${echo} "restoration warning:  size of 'p3' is not 24"
+  fi
+fi
+# ============= text ==============
+if test -n "${keep_file}" && test -f 'text'
+then
+${echo} "x - SKIPPING text (file already exists)"
+else
+${echo} "x - extracting text (binary)"
+  sed 's/^X//' << 'SHAR_EOF' | uudecode &&
+begin 600 text
+M5F%S:6QI;F$@5FQA<V]V80I#3U`@,S0P-`H*4')O:F5C="`S"@I4:&ES('!R
+M;VIE8W0@:6UP;&5M96YT<R!P87-S(#$@;V8@=&AE(&%S<V5M<&QE<BX@5&AE
+M('!R;V=R86UM:6YG(&QA;F=U86=E('1H870@=V%S('5S960@9F]R(&-R96%T
+M:6YG('1H92!P<F]J96-T(&ES($IA=F$N(%1H92!P<F]G<F%M(&-O;G-T<G5C
+M=',@=&AE('-Y;6)O;"!T86)L92!W:71H('1H92!A9&1R97-S97,@87-S;V-I
+M871E9"!W:71H(&5A8V@@:6YS=')U8W1I;VXN(%1H92!P<F]G<F%M('!A<G-E
+M<R!T:&4@:6YP=70@9FEL92!A;F0@<'5T<R!I=',@8V]N=&5N=',@:6YT;R!A
+M;B!A<G)A>2!O9B!!<W-E;6)L97),:6YE(&]B:F5C=',N(%1H96XL(&ET(&=O
+M97,@=&AR;W5G:"!A;B!A<G)A>2!A;F0@87-S:6=N<R!A9&1R97-S97,@=&\@
+M96%C:"!I;G-T<G5C=&EO;BX@2&%S:"!T86)L92!W87,@=7-E9"!T;R!S=&]R
+M92!T:&4@;&%B96QS(&%N9"!T:&4@:6YF;W)M871I;VX@86)O=70@=&AE(&%S
+M<V5M8FQE<B!I;G-T<G5C=&EO;G,N(`I4:&4@;6YE=6UO;FEC<R!I;B!T:&4@
+M:6YP=70@9FEL92!S:&]U;&0@8F4@:6X@=7!P97(@8V%S92!A;F0@9F]L;&]W
+M('1H92!F;W)M870@8F5L;W<Z"FEN(&9I>&5D(&9O<FUA=#H*"D-O;"`Q+3@@
+M("`@;&%B96P@;W!T:6]N86P*0V]L(#D@("`@("!B;&%N:PI#;VP@,3`@("`@
+M("L@;W!T:6]N86P*0V]L(#$Q+3$W("!M;F5U;6]N:6,*0V]L(#$X("`@("!B
+M;&%N:PI#;VP@,3D@("`@(",L($`L(#T@("XN+B!O<'1I;VYA;`I#;VP@,C`M
+M,CD@("AO<&5R86YD*2!L86)E;"P@<F5G:7-T97(L("<L)RQ8(&]P=&EO;F%L
+M("`N+BX*0V]L(#,P+3,Q("!B;&%N:PI#;VP@,S(M.#`@(&-O;6UE;G1S(&]P
+M=&EO;F%L("A.3R!015))3T0@4D5154E2140I"@I4:&4@<V%M<&QE(&EN<'5T
+M(&%N9"!O=71P=70@87)E('-H;W=N(&)E;&]W.@I)3E!55#H*+B!415-44R!0
+M0R!&3U)705)$($%$1%)%4U-)3D<*+B!415-44R!"05-%($%$1%)%4U-)3D<*
+M+B!415-44R!00R!"04-+5T%21"!!1$1215-324Y'"D5804U03$4@("!35$%2
+M5"`@("`Q,#`*15A!("`@("`@($Q$5"`@("`@(",T("`@("`@("`@(`H@("`@
+M("`@("`@3$1!("`@("`@(S`@("`@("`@("`*("`@("`@("`@($%$1%(@("`@
+M(%0L02`@("`@("`*("`@("`@("`@($%$1"`@("`@(%-%0R`@("`@(`H@("`@
+M("`@("`K4U1!("`@("`@04Y3("`@("`*("`@("`@("`@($Q$6"`@("`@($].
+M12`@("`*("`@("`@("`@(%-402`@("`@($%.4RQ8(`H@("`@("`@("`@4E-5
+M0B`@("`@("`@(`I314,@("`@("`@5T]21"`@("`@+3,P"DY532`@("`@("!2
+M15-7("`@("`Q"D%.4R`@("`@("!215-7("`@("`R("`@"D].12`@("`@("!7
+M3U)$("`@("`S"D))1R`@("`@("!215-7("`@("`Q,#`P("`@"D(@("`@("`@
+M("!215-7("`@("`Q"B`@("`@("`@("!%3D0@("`@("!%6$$*"D]55%!55`H@
+M("`@("`@+B!415-44R!00R!&3U)705)$($%$1%)%4U-)3D<*("`@("`@("X@
+M5$535%,@0D%312!!1$1215-324Y'"B`@("`@("`N(%1%4U13(%!#($)!0TM7
+M05)$($%$1%)%4U-)3D<*,3`P($5804U03$4@4U1!4E0@,3`P(`HQ,#`@15A!
+M($Q$5"`C-"`*,3`S("!,1$$@(S`@"C$P-B`@041$4B!4+$$@"C$P."`@041$
+M(%-%0R`*,3!B("`K4U1!($%.4R`*,3!F("!,1%@@3TY%(`HQ,3(@(%-402!!
+M3E,L6"`*,3$U("!24U5"("`*,3$X(%-%0R!73U)$("TS,"`*,3%B($Y532!2
+M15-7(#$@"C$Q92!!3E,@4D535R`R(`HQ,C0@3TY%(%=/4D0@,R`*,3(W($))
+I1R!215-7(#$P,#`@"F-D9B!"(%)%4U<@,2`*8V4R("!%3D0@15A!(`HW
+`
+end
+SHAR_EOF
+  (set 20 14 03 27 23 28 55 'text'
+   eval "${shar_touch}") && \
+  chmod 0664 'text'
+if test $? -ne 0
+then ${echo} "restore of text failed"
+fi
+  if ${md5check}
+  then (
+       ${MD5SUM} -c >/dev/null 2>&1 || ${echo} 'text': 'MD5 check failed'
+       ) << \SHAR_EOF
+f8ae3e3f693feb6affe6b93c826dc7c4  text
+SHAR_EOF
+  else
+test `LC_ALL=C wc -c < 'text'` -ne 1796 && \
+  ${echo} "restoration warning:  size of 'text' is not 1796"
+  fi
+fi
+if rm -fr ${lock_dir}
+then ${echo} "x - removed lock directory ${lock_dir}."
+else ${echo} "x - failed to remove lock directory ${lock_dir}."
+     exit 1
+fi
+exit 0

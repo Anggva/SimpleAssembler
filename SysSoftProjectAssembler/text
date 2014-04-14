@@ -1,0 +1,61 @@
+Vasilina Vlasova
+COP 3404
+
+Project 3
+
+This project implements pass 1 of the assempler. The programming language that was used for creating the project is Java. The program constructs the symbol table with the addresses associated with each instruction. The program parses the input file and puts its contents into an array of AssemblerLine objects. Then, it goes through an array and assigns addresses to each instruction. Hash table was used to store the labels and the information about the assembler instructions. 
+The mneumonics in the input file should be in upper case and follow the format below:
+in fixed format:
+
+Col 1-8    label optional
+Col 9      blank
+Col 10     + optional
+Col 11-17  mneumonic
+Col 18     blank
+Col 19     #, @, =  ... optional
+Col 20-29  (operand) label, register, ',',X optional  ...
+Col 30-31  blank
+Col 32-80  comments optional (NO PERIOD REQUIRED)
+
+The sample input and output are shown below:
+INPUT:
+. TESTS PC FORWARD ADDRESSING
+. TESTS BASE ADDRESSING
+. TESTS PC BACKWARD ADDRESSING
+EXAMPLE   START    100
+EXA       LDT      #4          
+          LDA      #0         
+          ADDR     T,A       
+          ADD      SEC      
+         +STA      ANS     
+          LDX      ONE    
+          STA      ANS,X 
+          RSUB         
+SEC       WORD     -30
+NUM       RESW     1
+ANS       RESW     2   
+ONE       WORD     3
+BIG       RESW     1000   
+B         RESW     1
+          END      EXA
+
+OUTPUT
+       . TESTS PC FORWARD ADDRESSING
+       . TESTS BASE ADDRESSING
+       . TESTS PC BACKWARD ADDRESSING
+100 EXAMPLE START 100 
+100 EXA LDT #4 
+103  LDA #0 
+106  ADDR T,A 
+108  ADD SEC 
+10b  +STA ANS 
+10f  LDX ONE 
+112  STA ANS,X 
+115  RSUB  
+118 SEC WORD -30 
+11b NUM RESW 1 
+11e ANS RESW 2 
+124 ONE WORD 3 
+127 BIG RESW 1000 
+cdf B RESW 1 
+ce2  END EXA 

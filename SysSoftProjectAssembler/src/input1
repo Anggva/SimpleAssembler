@@ -1,0 +1,9 @@
+          START    88
+          WORD     18
+M         LDA      x
+          STA      z
+x         RESW     10
+          LDB      M
+z         RESW     8
+          STA      m
+          END      m
